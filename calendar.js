@@ -3,7 +3,7 @@ const monthYearEl = document.getElementById("monthYear");
 const modalEl = document.getElementById("eventModal");
 let currentDate = new Date();
 
-// 📅 توليد عرض التقويم الكامل
+// 📅 Generate Full Calendar View
 function renderCalendar(date = new Date()) {
   calendarEl.innerHTML = "";
 
@@ -76,7 +76,7 @@ function renderCalendar(date = new Date()) {
       eventBox.appendChild(ev);
     });
 
-    // ➕ ➖ أزرار التراكب
+    // ➕ ➖ Overlay Buttons
     const overlay = document.createElement("div");
     overlay.className = "day-overlay";
 
@@ -106,7 +106,7 @@ function renderCalendar(date = new Date()) {
   }
 }
 
-// ✅ نافذة الإضافة
+// ✅ Add Event Modal
 function openModalForAdd(dateStr) {
   document.getElementById("formAction").value = "add";
   document.getElementById("eventId").value = "";
@@ -128,7 +128,7 @@ function openModalForAdd(dateStr) {
   modalEl.style.display = "flex";
 }
 
-// ✏️ نافذة التعديل
+// ✏️ Edit Event Modal
 function openModalForEdit(eventsOnDate) {
   document.getElementById("formAction").value = "edit";
   modalEl.style.display = "flex";
@@ -154,7 +154,7 @@ function openModalForEdit(eventsOnDate) {
   handleEventSelection(JSON.stringify(eventsOnDate[0]));
 }
 
-// ⬇️ تعبئة النموذج تلقائيًا
+// ⬇️ Autofill the Form
 function handleEventSelection(eventJSON) {
   const event = JSON.parse(eventJSON);
 
@@ -171,18 +171,18 @@ function handleEventSelection(eventJSON) {
   document.getElementById("endTime").value = event.end_time || "";
 }
 
-// ❌ إغلاق النافذة
+// ❌ Close the Modal
 function closeModal() {
   modalEl.style.display = "none";
 }
 
-// 🔄 التنقل بين الأشهر
+// 🔄 Navigate Between Months
 function changeMonth(offset) {
   currentDate.setMonth(currentDate.getMonth() + offset);
   renderCalendar(currentDate);
 }
 
-// ⏰ تحديث الساعة
+// ⏰ Update the Clock
 function updateClock() {
   const now = new Date();
   const clock = document.getElementById("clock");
@@ -193,7 +193,7 @@ function updateClock() {
   ].join(":");
 }
 
-// 🚀 تشغيل عند تحميل الصفحة
+// 🚀 Run on Page Load
 renderCalendar(currentDate);
 updateClock();
 setInterval(updateClock, 1000);
